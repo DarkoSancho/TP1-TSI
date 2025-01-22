@@ -1,24 +1,24 @@
 [im_flou, map_flou]=imread('texte_flou.png');   % Lecture de l'image flou
 [im_ref, map_ref]=imread('texte_ref.png');   % Lecture de l'image flou
-l=size(im,1);                        % Hauteur image initiale
-c=size(im,2);                        % Largeur image initiale
-K_flou = 11;
+l=size(im_flou,1);                        % Hauteur image initiale
+c=size(im_flou,2);                        % Largeur image initiale
+K_flou = 20;
 
-I=fftshift(fft2(im_ref));               % TF image
+I=fftshift(fft2(im_ref));               % TF image ref
 H = zeros(l,c);                        % Matrice de filtrage
 IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversion sans tenir compte des bruits 
+D = fftshift(fft2(im_flou));            % TF image flou
 
 
+% Affichage image flou
+figure('numbertitle','off','name','Image flou');
+image(im_flou);
+colormap(map_flou);
 
-% % Affichage image flou
-% figure('numbertitle','off','name','Image flou');
-% image(im_flou);
-% colormap(map_flou);
-% 
-% % Affichage image réference
-% figure('numbertitle','off','name','Image reference');
-% image(im_ref);
-% colormap(map_ref);
+% Affichage image réference
+figure('numbertitle','off','name','Image reference');
+image(im_ref);
+colormap(map_ref);
 
 
 % Créer la réponse impulsionnelle (h)
@@ -51,7 +51,7 @@ IM_flou_simple = D .* H;
 % Passage à l'image "visuelle"
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
 
-Pi = norm(I)* norm(I);
+
 
 % Affichage image flou avec le filtrage inverse simple
 figure('numbertitle','off','name','Image flou avec le filtrage inverse simple');

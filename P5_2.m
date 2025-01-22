@@ -1,7 +1,7 @@
 [im_flou, map_flou]=imread('texte_flou.png');   % Lecture de l'image flou
 [im_ref, map_ref]=imread('texte_ref.png');   % Lecture de l'image flou
-l=size(im,1);                        % Hauteur image initiale
-c=size(im,2);                        % Largeur image initiale
+l=size(im_flou,1);                        % Hauteur image initiale
+c=size(im_flou,2);                        % Largeur image initiale
 K_flou = 20;
 
 
@@ -11,15 +11,15 @@ IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversi
 D = fftshift(fft2(double(im_flou))); 
 
 
-% % Affichage image flou
-% figure('numbertitle','off','name','Image flou');
-% image(im_flou);
-% colormap(map_flou);
-% 
-% % Affichage image réference
-% figure('numbertitle','off','name','Image reference');
-% image(im_ref);
-% colormap(map_ref);
+% Affichage image flou
+figure('numbertitle','off','name','Image flou');
+image(im_flou);
+colormap(map_flou);
+
+% Affichage image réference
+figure('numbertitle','off','name','Image reference');
+image(im_ref);
+colormap(map_ref);
 
 
 % Créer la réponse impulsionnelle (h)
@@ -40,6 +40,12 @@ h_norm = h/sum;
 H = fftshift(fft2(h_norm));
 
 
+% TF de H
+figure('numbertitle', 'off', 'name', 'TF de H');
+affichage = abs(log(H));
+plot(affichage);
+title('H');
+grid on;
 
 % Filtrage Inverse simple
 IM_flou_simple = I .* H;
