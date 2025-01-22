@@ -62,10 +62,21 @@ for u=1:l
     end
 end
 
+
+
+
+Im_ideale_simpliste = D ./ H;
+im_ideale_simpliste = real(ifft2(fftshift(Im_ideale_simpliste)));
+
+
+figure('numbertitle','off','name','Image idéale avec filtrage inverse simpliste');
+image(im_ideale_simpliste);
+colormap(map_flou);
+
 Iideale = D.*W;
 i_ideale = real(ifft2(fftshift(Iideale)));
 
-figure('numbertitle','off','name','Image idéale');
+figure('numbertitle','off','name','Image idéale avec filtrage de Wiener');
 image(i_ideale);
 colormap(map_flou);
 
