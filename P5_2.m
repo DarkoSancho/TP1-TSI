@@ -2,7 +2,7 @@
 [im_ref, map_ref]=imread('texte_ref.png');   % Lecture de l'image flou
 l=size(im,1);                        % Hauteur image initiale
 c=size(im,2);                        % Largeur image initiale
-K_flou = 11;
+K_flou = 17;
 
 I=fftshift(fft2(im_ref));               % TF image
 H = zeros(l,c);                        % Matrice de filtrage
@@ -50,10 +50,10 @@ IM_flou_simple = I .* H;
 % Passage à l'image "visuelle"
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
 
-Pi = norm(I)* norm(I);
+Pi = abs(I).* abs(I);
 ib=im_flou_simple-floor(im_flou_simple);
 Ib=fft2(fftshift(ib));
-Pb=norm(Ib)*norm(Ib);
+Pb=abs(Ib).*abs(Ib);
 disp(Pi);
 disp(Pb);
 
