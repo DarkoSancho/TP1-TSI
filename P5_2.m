@@ -38,11 +38,7 @@ h_norm = h/sum;
 % Calcul de la TF de H
 H = fftshift(fft2(h_norm));
 
-% TF de H
-figure('numbertitle', 'off', 'name', 'TF de H');
-plot(H);
-title('H');
-grid on;
+
 
 % Filtrage Inverse simple
 IM_flou_simple = I .* H;
@@ -57,11 +53,6 @@ Pi = abs(I)* abs(I);
 ib=im_flou_simple-floor(im_flou_simple);
 Ib=fft2(fftshift(ib));
 Pb=abs(Ib).*abs(Ib);
-disp(Pi);
-disp(Pb);
 
 
-% Affichage image flou avec le filtrage inverse simple
-figure('numbertitle','off','name','Image flou avec le filtrage inverse simple');
-image(im_flou_simple);
-colormap(map_flou);
+
