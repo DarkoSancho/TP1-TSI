@@ -22,17 +22,18 @@ IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversi
 
 
 % Créer la réponse impulsionnelle (h)
-H(floor(l/2)-1:floor(l/2)+1, floor(c/2)-K_flou/2:floor(c/2)+K_flou/2) = 1; %Rectangle
-H=fftshift(H);
+h = zeros(l,c);
+h(floor(l/2)-1:floor(l/2)+1, floor(c/2)-K_flou/2:floor(c/2)+K_flou/2) = 1; %Rectangle
+h=fftshift(h);
 sum = 0;
-for i=1:size(H,1)
-    for j=1:size(H,2)
-        sum = sum+H(i,j);
+for i=1:size(h,1)
+    for j=1:size(h,2)
+        sum = sum+h(i,j);
     end
 end
 
 
-h_norm = H/sum;
+h_norm = h/sum;
 
 % Calcul de la TF de H
 H = fftshift(fft2(h_norm));
