@@ -51,6 +51,11 @@ IM_flou_simple = I .* H;
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
 
 Pi = norm(I)* norm(I);
+ib=im_flou_simple-floor(im_flou_simple);
+Ib=fft2(fftshift(ib));
+Pb=norm(Ib)*norm(Ib);
+disp(Pi);
+disp(Pb);
 
 % Affichage image flou avec le filtrage inverse simple
 figure('numbertitle','off','name','Image flou avec le filtrage inverse simple');
