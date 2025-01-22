@@ -6,7 +6,7 @@ L=floor(l/4);                        % Hauteur image réduite
 C=floor(c/4);                        % Largeur image réduite
 im_r=zeros(L,C);                     % Image réduite
 im_r_filtree=zeros(L,C);             % Image réduite
-K = 0.00005;                                   % Paramètre du filtre
+K = 0.005;                                   % Paramètre du filtre
 H=zeros(l,c);                        % Matrice de filtrage
 
 % Affichage image originale 

@@ -29,21 +29,21 @@ colormap(map);
 % Boucle de création de la matrice de filtrage 
 for i=1:l
     for j=1:c
-        H(i,j)=exp(-K*((i)*(i)+(j)*(c/2-j)));
+        H(i,j)=exp(-K*((l/2-i)*(l/2-i)+(c/2-j)*(c/2-j)));
     end
 end
 
-% Image filtrée en fréquence ----------------------------------------------
+% Image filtrée en fréquence 
 IM_FILTREE=IM.*H;
 
-% Passage à l'image filtrée "visuelle"-------------------------------------
+% Passage à l'image filtrée "visuelle"
 im_filtree=real(ifft2(fftshift(IM_FILTREE)));
 
 figure('numbertitle','off','name','Image filtrée grand format');
 image(im_filtree);
 colormap(map);
 
-% Boucle création de l'image réduite après filtrage -----------------------
+% Boucle création de l'image réduite après filtrage
 for i=1:L
     for j=1:C
         im_r_filtree(i,j)=im_filtree(4*i,4*j);
@@ -54,4 +54,8 @@ end
 figure('numbertitle','off','name','Image filtrée réduite');
 image(im_r_filtree);
 colormap(map);
-%end
+
+
+
+%j'ai du mal a comprendre a quoi correspond une image dans le domaine
+%spatia vers le domaine fréquentielle

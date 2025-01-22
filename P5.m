@@ -4,28 +4,35 @@ l=size(im,1);                        % Hauteur image initiale
 c=size(im,2);                        % Largeur image initiale
 K_flou = 11;
 
-D=fftshift(fft2(im));               % TF image
+D=fftshift(fft2(im_ref));               % TF image
 H = zeros(l,c);                        % Matrice de filtrage
 IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversion sans tenir compte des bruits 
 
 
 
-% Affichage image flou
-figure('numbertitle','off','name','Image flou');
-image(im_flou);
-colormap(map_flou);
-
-% Affichage image réference
-figure('numbertitle','off','name','Image reference');
-image(im_ref);
-colormap(map_ref);
+% % Affichage image flou
+% figure('numbertitle','off','name','Image flou');
+% image(im_flou);
+% colormap(map_flou);
+% 
+% % Affichage image réference
+% figure('numbertitle','off','name','Image reference');
+% image(im_ref);
+% colormap(map_ref);
 
 
 % Créer la réponse impulsionnelle (h)
-h = zeros(l, c);
-h(floor(l/2)-1:floor(l/2)+1, floor(c/2)-K_flou/2:floor(c/2)+K_flou/2) = 1;
+H(floor(l/2)-1:floor(l/2)+1, floor(c/2)-K_flou/2:floor(c/2)+K_flou/2) = 1; %Rectangle
 
-h_norm = normalize(h);
+sum = 0;
+for i=1:size(H,1)
+    for j=1:size(H,2)
+        sum = sum+h(i,j);
+    end
+end
+
+
+h_norm = H/sum;
 
 % Calcul de la TF de H
 H = fftshift(fft2(h_norm));
@@ -37,7 +44,7 @@ title('H');
 grid on;
 
 % Filtrage Inverse simple
-IM_flou_simple = D ./ H;
+IM_flou_simple = D .* H;
 
 % Passage à l'image "visuelle"
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
