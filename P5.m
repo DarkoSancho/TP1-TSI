@@ -40,7 +40,8 @@ H = fftshift(fft2(h_norm));
 
 % TF de H
 figure('numbertitle', 'off', 'name', 'TF de H');
-plot(H);
+affichage = abs(log(H));
+plot(affichage);
 title('H');
 grid on;
 
