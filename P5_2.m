@@ -51,8 +51,9 @@ IM_flou_simple = I .* H;
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
 
 
+
 %puissance spectrale
-Pi = norm(I)* norm(I);
+Pi = abs(I)* abs(I);
 ib=im_flou_simple-floor(im_flou_simple);
 Ib=fft2(fftshift(ib));
 Pb=abs(Ib).*abs(Ib);
