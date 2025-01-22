@@ -2,12 +2,13 @@
 [im_ref, map_ref]=imread('texte_ref.png');   % Lecture de l'image flou
 l=size(im,1);                        % Hauteur image initiale
 c=size(im,2);                        % Largeur image initiale
-K_flou = 22;
+K_flou = 20;
+
 
 I=fftshift(fft2(im_ref));               % TF image
 H = zeros(l,c);                        % Matrice de filtrage
 IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversion sans tenir compte des bruits 
-
+D = fftshift(fft2(double(im_flou))); 
 
 
 % % Affichage image flou
@@ -49,15 +50,15 @@ im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
 
 
 %puissance spectrale
-Pi = abs(I)* abs(I);
+Pi = abs(I).* abs(I);
 ib=im_flou_simple-floor(im_flou_simple);
-Ib=fft2(fftshift(ib));
+Ib=fftshift(fft2(ib));
 Pb=abs(Ib).*abs(Ib);
 
 W = zeros(l,c);
 for u=1:l
     for v = 1:c
-        W(u,v)=(1/H(u,v))*abs(H(u,v))*abs(H(u,v))/(abs(H(u,v))*abs(H(u,v))+Pb(u,v)/Pi(u,v));
+        W(u,v)=(1./H(u,v))*abs(H(u,v))*abs(H(u,v))/(abs(H(u,v))*abs(H(u,v))+Pb(u,v)/Pi(u,v));
     end
 end
 
