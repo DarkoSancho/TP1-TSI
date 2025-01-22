@@ -7,10 +7,11 @@ Te = (b - a) / N;
 fe = 1 / Te;
 fc = 28;
 
-x =fcos(60,0).*(s1_mod(40)+s2_mod(60)); %Retrouve un sin simple pour -df mais pas positif ?
+x =fcos(20,0).*(s1_mod(40)+s2_mod(20)); %Retrouve un sin simple pour -df mais pas positif ? On peut prendre les valeurs que l'on veut tant que c'est les mêmes
 yf = tfour(x.'); % Transformée de Fourier
-x2=tfourinv(y);
 y = yf;
+x2=tfourinv(y);
+
 
 Frequence = linspace(-fe/2, fe/2, N); % Fréquences centrées
 Temps = linspace(-25, 25, N); % Temps
