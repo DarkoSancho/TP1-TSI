@@ -67,3 +67,4 @@ i_ideale = real(ifft2(fftshift(Iideale)));
 figure('numbertitle','off','name','Image idéale');
 image(i_ideale);
 colormap(map_flou);
+
