@@ -46,7 +46,7 @@ title('H');
 grid on;
 
 % Filtrage Inverse simple
-IM_flou_simple = I .* H;
+IM_flou_simple = D .* H;
 
 % Passage à l'image "visuelle"
 im_flou_simple = real(ifft2(fftshift(IM_flou_simple)));
