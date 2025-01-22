@@ -2,9 +2,9 @@
 [im_ref, map_ref]=imread('texte_ref.png');   % Lecture de l'image flou
 l=size(im,1);                        % Hauteur image initiale
 c=size(im,2);                        % Largeur image initiale
-K_flou = 11;
+K_flou = 17;
 
-D=fftshift(fft2(im_ref));               % TF image
+D=fftshift(fft2(im_ref));               % TF image de reference
 H = zeros(l,c);                        % Matrice de filtrage
 IM_flou_simple = zeros(l,c);           % image rétablie avec une simple inversion sans tenir compte des bruits 
 
@@ -42,6 +42,7 @@ figure('numbertitle', 'off', 'name', 'TF de H');
 plot(H);
 title('H');
 grid on;
+
 
 % Filtrage Inverse simple
 IM_flou_simple = D .* H;
