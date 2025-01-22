@@ -6,7 +6,7 @@ N = 65536;
 Te = (b - a) / N;
 fe = 1 / Te;
 
-x =fcos(40,0).*(s1_mod(10)+s2_mod(25)); %Retrouve un sin simple pour -df mais pas positif ?
+x =fcos(40,0).*(s1_mod(40)+s2_mod(60)); %Retrouve un sin simple pour -df mais pas positif ?
 y = tfour(x.'); % Transformée de Fourier
 x2=tfourinv(y);
 

@@ -5,13 +5,22 @@ b = 25;
 N = 65536;
 Te = (b - a) / N;
 fe = 1 / Te;
+fc = 28;
 
-x =s1_mod(20); %Retrouve un sin simple pour -df mais pas positif ?
-y = tfour(x.'); % Transformée de Fourier
+x =fcos(60,0).*(s1_mod(40)+s2_mod(60)); %Retrouve un sin simple pour -df mais pas positif ?
+yf = tfour(x.'); % Transformée de Fourier
 x2=tfourinv(y);
+y = yf;
 
 Frequence = linspace(-fe/2, fe/2, N); % Fréquences centrées
 Temps = linspace(-25, 25, N); % Temps
+
+% Pour réaliser le passe bas
+for k = 1:size(Frequence,2)
+    if abs(Frequence(k))>fc
+        y(k)=0;
+    end
+end
 
 % % Première figure : Affichage des figures temporelles
 % figure;
